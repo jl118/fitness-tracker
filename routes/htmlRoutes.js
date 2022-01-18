@@ -17,8 +17,4 @@ router.get("/exercise", async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/exercise.html"));
 });
 
-router.get("/exercise/*", async (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/exercise.html"));
-});
-
 module.exports = router;

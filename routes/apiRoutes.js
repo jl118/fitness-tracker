@@ -4,7 +4,11 @@ const db = require("../models");
 
 // latest workout
 app.get("/workouts", (req, res) => {
-    db.Workout.find({})
+    db.Workout.aggregate([
+        { $addFields: {
+            totalDuration: { $sum: "$exercises.duration" },
+        }},
+    ])
     .then((dbWorkouts) => {
         res.json(dbWorkouts);
     })
@@ -16,19 +20,18 @@ app.get("/workouts", (req, res) => {
 // past 7 workouts 
 app.get("/workouts/range", (req, res) => {
     db.Workout.aggregate([
-        {
-            $addFields: {
-                totalDuration: { $sum: "$exercises.duration" },
-            },
-        },
-    ])
-    .sort({ day: -1 })
-    .limit(7)
-    .then((dbWorkouts) => {
-        res.json(dbWorkouts);
-    })
-    .catch((err) => {
-        res.json(err);
+        { $addFields: {
+            totalDuration: { $sum: "$exercises.duration" },
+        }},
+        { "$sort": { day: -1 } },
+        { "$limit": 7 }
+    ],
+    function(err, data) {
+        if(err) {
+            console.log(err)
+        } else {
+            res.json(data)
+        }
     });
 });
 
