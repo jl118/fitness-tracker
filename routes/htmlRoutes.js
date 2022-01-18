@@ -7,8 +7,10 @@ router.get("/", async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-// TODO: add stats route
-
+// stats route
+router.get("/stats", async (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
 // TODO: add exercise route
 
 module.exports = router;
