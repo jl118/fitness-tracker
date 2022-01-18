@@ -11,6 +11,12 @@ router.get("/", async (req, res) => {
 router.get("/stats", async (req, res) => {
     res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
-// TODO: add exercise route
+
+// exercise route
+router.get("/exercise", async (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+});
+
+
 
 module.exports = router;
