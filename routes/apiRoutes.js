@@ -49,9 +49,15 @@ app.put("/workouts/:id", (req, res) => {
     });
 });
 
-// TODO: add a new workout
+// add a new workout
 app.post("/workouts", (req, res) => {
-  
+    db.Workout.create(req.body)
+    .then((dbWorkouts) => {
+        res.json(dbWorkouts);
+    })
+    .catch((err) => {
+        res.json(err);
+    });
 });
 
 module.exports = app;
