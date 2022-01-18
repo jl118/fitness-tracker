@@ -3,7 +3,13 @@ const { Workout } = require("../models");
 const db = require("../models");
 
 app.get("/workouts", (req, res) => {
-
+    db.Workout.find({})
+        .then((dbWorkouts) => {
+            res.json(dbWorkouts);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
 });
 
 app.get("/workouts/range", (req, res) => {
