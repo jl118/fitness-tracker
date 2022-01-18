@@ -7,3 +7,11 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+// TODO: add middleware and connection
+
+app.use(routes);
+
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
+});
